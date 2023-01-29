@@ -1,0 +1,54 @@
+<!-- template form -->
+<div class="container">
+    <h1>Create new animal</h1>
+
+    <form #animalForm="ngForm" (ngSubmit)="animalForm.form.valid && onSubmit(animalForm)" novalidate> <!-- catch validation before sending to server -->
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input type="number" name="id" class="form-control" required #id="ngModel" ngModel
+            [ngClass]="{'is-invalid': animalForm.submitted && id.errors}">
+          <div class="invalid-feedback">
+            Please enter the animal id.
+          </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required minlength="3" #name="ngModel" ngModel
+            [ngClass]="{'is-invalid': animalForm.submitted && name.errors}">
+            <div *ngIf="animalForm.submitted && name.errors" class="invalid-feedback">
+                <div *ngIf="name.errors['required']">
+                    Please enter the animal name.
+                </div>
+                <div *ngIf="name.errors['minlength']">
+                    Animal name must be at least 3 characters.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="lifespan" class="form-label">Animal Lifespan (in years)</label>
+            <input type="number" name="lifespan" class="form-control" required #lifespan="ngModel" ngModel
+            [ngClass]="{'is-invalid': animalForm.submitted && lifespan.errors}">
+            <div class="invalid-feedback">
+                Please enter the animal's lifespan.
+              </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required #email="ngModel" ngModel
+            [ngClass]="{'is-invalid': animalForm.submitted && email.errors}">
+            <div *ngIf="animalForm.submitted && email.errors" class="invalid-feedback">
+                <div *ngIf="email.errors['required']">
+                    Please enter an email address.
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="onSubmit">Add animal</button>
+        &nbsp;&nbsp;
+        <button type="reset" class="btn btn-danger">Reset Form</button>
+
+    </form>
+</div>

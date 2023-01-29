@@ -1,0 +1,27 @@
+<h3>List of Items</h3>
+
+<!-- <ul>
+    <li *ngFor="let itm of itemList">{{itm.name}}<button type="button" (click) = "onItemClick(itm)">Select</button></li>
+</ul> -->
+
+<table>
+    <thead>
+        <td>Item</td>
+        <td>Item ID</td>
+        <td>Price</td>
+    </thead>
+    <tr *ngFor="let itm of itemList">
+        <td>{{itm.name}}</td>
+        <td>{{itm.id}}</td>
+        <td>{{itm.price}}</td>
+        <td>
+            <!-- <button type="button" (click) = "onItemClick($event)" value={{itm.name}}>Select</button> -->
+            <button type="button" (click) = "onItemClick(itm)">Select</button>
+        </td>
+    </tr>
+</table>
+
+<div *ngIf="selectedItem">
+    <!-- <h2>You have selected {{ selectedItem }}</h2> -->
+    <h2>You have selected {{ selectedItem.name }}</h2>
+</div>

@@ -1,0 +1,65 @@
+<!-- reactive form -->
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control"
+                placeholder="" formControlName="name" [ngClass]="{'is-invalid': submitted && form.get('name')?.errors }">
+            <div *ngIf="submitted && form.get('name')?.hasError('required')" class="invalid-feedback">
+                Name is required
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control"
+                placeholder="Enter email here" formControlName="email" [ngClass]="{'is-invalid': submitted && form.get('email')?.errors }">
+            <div *ngIf="submitted && form.get('email')?.errors" class="invalid-feedback">
+                <div *ngIf="form.get('email')?.hasError('required')">
+                    Email is required
+                </div>
+                <div *ngIf="form.get('email')?.hasError('email')">
+                    Invalid email format
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control"
+                placeholder="Username"  formControlName="username" [ngClass]="{'is-invalid': submitted && form.get('username')?.errors }">
+            <div *ngIf="submitted && form.get('username')?.errors" class="invalid-feedback">
+                <div *ngIf="form.get('username')?.hasError('required')">
+                    Username is required
+                </div>
+                <div *ngIf="form.get('username')?.hasError('minlength')">
+                    Username is too short
+                </div>
+                <div *ngIf="form.get('username')?.hasError('maxlength')">
+                    Username is too long
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control"
+                placeholder="Enter password here" formControlName="password" [ngClass]="{'is-invalid': submitted && form.get('password')?.errors }">
+            <div *ngIf="submitted && form.get('password')?.errors" class="invalid-feedback">
+                <div *ngIf="form.get('password')?.hasError('required')">
+                    Password is required
+                </div>
+                <div *ngIf="form.get('password')?.hasError('minlength')">
+                    Password is too short
+                </div>
+                <div *ngIf="form.get('password')?.hasError('maxlength')">
+                    Password is too long
+                </div>
+            </div>
+        </div>
+        <button type="reset" class="btn btn-danger" (click)="OnReset()">Reset</button>
+        &nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
